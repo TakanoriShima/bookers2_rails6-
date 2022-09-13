@@ -59,3 +59,9 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 gem 'devise'
+
+group :test do
+  gem 'rspec-rails'
+  gem "factory_bot_rails"
+  gem 'faker'
+end
