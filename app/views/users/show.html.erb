@@ -1,2 +1,81 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class='row'>
+  <div class='col-md-3'>
+    <h2>User info</h2>
+    <table class='table'>
+      <tr>
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image, height: '100' %>
+        <% else %>
+          <%= image_tag 'default-image.jpg', height: '100' %>
+        <% end %>
+      </tr>
+      <tr>
+        <th>name</th>
+        <th><%= @user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th>
+          <%# if @user.introduction %>
+          <%= @user.introduction %>
+          <%# else %>
+          
+          <%# end %>
+        </th>
+      </tr>
+    </table>
+    <div class='row'>
+      <a class="btn btn-outline-secondary btn-block edit_user_37396" href="/users/<%= @user.id %>/edit">
+        <i class="fas fa-user-cog"></i>
+      </a>
+    </div>
+    <h2 class="mt-3">New book</h2>
+    <form action="/books" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="FZrwZ98mWMEK2-lYh9yNaLa5rr_iKFqU-Kpul_c9t4hykKb3kIJRqUnmRBkeO_g_6i_dd4IlL9qdSozgRXFAMw" autocomplete="off" />
+      <div class="form-group">
+        <label for="book_title">Title</label>
+        <input class="form-control book_title" type="text" name="book[title]" id="book_title" />
+      </div>
+      <div class="form-group">
+        <label for="book_opinion">Opinion</label>
+        <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book" />
+      </div>
+    </form>
+  </div>
+  <div class='col-md-8 offset-md-1'>
+    <h2>Books</h2>
+    <table class='table table-hover table-inverse'>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+        <tr>
+          <td>
+            <%= link_to user_path(book.user) do %>
+              <% if @user.profile_image.attached? %>
+                <%= image_tag @user.profile_image, height: '80' %>
+              <% else %>
+                <%= image_tag 'default-image.jpg', height: '80' %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <a class="book_27948" href="/books/<%= book.id %>">
+              <%= book.title %>
+            </a>
+          </td>
+          <td><%= book.body %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>  

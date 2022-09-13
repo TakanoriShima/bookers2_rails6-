@@ -1,2 +1,72 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<p id="notice"></p>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <table class='table'>
+        <tr>
+          <% if @book.user.profile_image.attached? %>
+            <%= image_tag @book.user.profile_image, height: '100' %>
+          <% else %>
+              <%= image_tag 'default-image.jpg', height: '100' %>
+          <% end %>
+          <%#= image_tag 'default-image.jpg', size: '100x100' %></tr>
+        <tr>
+          <th>name</th>
+          <th><%= @book.user.name %></th>
+        </tr>
+        <tr>
+          <th>introduction</th>
+          <th><%= @book.user.introduction %></th>
+        </tr>
+      </table>
+  　
+      <div class='row'>
+        <a class="btn btn-outline-secondary btn-block edit_user_39484" href="/users/<%= @book.user.id %>/edit">
+        <i class="fas fa-user-cog"></i>
+        </a>
+      </div>
+      <h2 class="mt-3">New book</h2>
+      <form action="/books" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="kCVgWLODyRds-hX3aT4TClNhJMoMr8oAmWBBC-YgkRVjh5OkwaADvcnGRtrvxfD6P8S5kkMBRa9gg6nY8b4goA" autocomplete="off" />
+        <div class="form-group">
+          <label for="book_title">Title</label>
+          <input class="form-control book_title" type="text" name="book[title]" id="book_title" />
+        </div>
+        <div class="form-group">
+          <label for="book_opinion">Opinion</label>
+          <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book" />
+        </div>
+      </form>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Book detail</h2>
+      <table class='table'>
+        <tr>
+          <td>
+            <a href="/users/<%= @book.user.id %>">
+              <% if @book.user.profile_image.attached? %>
+                <%= image_tag @book.user.profile_image, height: '80' %>
+              <% else %>
+                  <%= image_tag 'default-image.jpg', height: '80' %>
+              <% end %>
+              
+              <%#= image_tag 'default-image.jpg', size: '100x100' %><br>
+              <%= @book.user.name %>
+            </a>          
+          </td>
+          <td><a href="/books/<%= @book.id %>"><%= @book.title %></a></td>
+          <td><%= @book.body %></td>
+          <% if @book.user.id == current_user.id %>
+          <td><a class="btn btn-sm btn-success edit_book_29499" href="/books/<%= @book.id %>/edit">Edit</a></td>
+          <td>
+            <%= link_to 'Destroy', book_path(@book), method: :delete, "data-confirm" =>  '本当に消しますか？' , class: 'btn btn-sm btn-danger destroy_book_29499' %>
+          </td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
