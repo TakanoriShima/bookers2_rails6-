@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  # protect_from_forgery
-  
+  protect_from_forgery
   def index
     @users = User.all
     @user = current_user

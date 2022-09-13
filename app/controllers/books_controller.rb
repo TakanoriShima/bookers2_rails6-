@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  # before_action :authenticate_user!
-  # protect_from_forgery
+  protect_from_forgery
   def index
     @user = current_user
     @book = Book.new
