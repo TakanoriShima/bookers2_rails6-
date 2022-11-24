@@ -10,7 +10,7 @@
           <% else %>
               <%= image_tag 'default-image.jpg', height: '100' %>
           <% end %>
-          <%#= image_tag 'default-image.jpg', size: '100x100' %></tr>
+        </tr>
         <tr>
           <th>name</th>
           <th><%= @book.user.name %></th>
@@ -53,7 +53,7 @@
                   <%= image_tag 'default-image.jpg', height: '80' %>
               <% end %>
               
-              <%#= image_tag 'default-image.jpg', size: '100x100' %><br>
+              <br>
               <%= @book.user.name %>
             </a>          
           </td>

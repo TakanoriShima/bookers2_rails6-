@@ -66,3 +66,7 @@ group :test do
   gem 'faker'
 end
 gem 'mini_magick'
+
+group :development, :production do
+  gem 'puma-daemon', require: false
+end
